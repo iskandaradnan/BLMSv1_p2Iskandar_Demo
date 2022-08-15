@@ -6,19 +6,26 @@ on:
       - 'main'
       - 'releases**'
 jobs:
-  build-and-test:
+build and test:
+  sonarqube-scan:
+  name: SonarQube Scan
+  runs-on: [self-hosted, onprem]
 
-    runs-on: [self-hosted, onprem]
+  steps:
+   - run: echo "SonarQube scanned"
+     
+ docker-build-and-push:
+  name: Docker Build And Push
+  runs-on: [self-hosted, onprem]
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup .NET Core SDK 
-        uses: actions/setup-dotnet@v1.7.2
-        with:
-          dotnet-version: 5.0.x
-      - name: Install dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
+  steps:
+   - run: echo "Docker build and push"
+     
+
+ deploy-app-dev:
+  name: Deploy App to Dev Rancher Cluster
+  runs-on: [self-hosted, onprem]
+  needs: [docker-build-and-push]
+
+  steps:
+   - run: echo "Deploy to Dev"
