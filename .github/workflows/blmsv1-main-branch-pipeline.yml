@@ -5,28 +5,28 @@ on:
   branches:
    - 'main'
 jobs:
-sonarqube-scan:
-  name: SonarQube Scan
-  runs-on: [self-hosted, onprem]
+    sonarqube-scan:
+     name: SonarQube Scan
+     runs-on: [self-hosted, onprem]
 
-  steps:
-   - run: echo "SonarQube scanned"
+     steps:
+     - run: echo "SonarQube scanned"
      
- docker-build-and-push:
-  name: Docker Build And Push
-  runs-on: [self-hosted, onprem]
+    docker-build-and-push:
+     name: Docker Build And Push
+     runs-on: ubuntu-latest
 
-  steps:
-   - run: echo "Docker build and push"
+     steps:
+      - run: echo "Docker build and push"
      
 
- deploy-app-dev:
-  name: Deploy App to Dev Rancher Cluster
-  runs-on: [self-hosted, onprem]
-  needs: [docker-build-and-push]
+    deploy-app-dev:
+     name: Deploy App to Dev Rancher Cluster
+     runs-on: ubuntu-latest
+     needs: [docker-build-and-push]
 
-  steps:
-   - run: echo "Deploy to Dev"
+     steps:
+     - run: echo "Deploy to Dev"
     
 
 
