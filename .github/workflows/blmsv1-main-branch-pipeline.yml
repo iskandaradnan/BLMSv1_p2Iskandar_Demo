@@ -7,7 +7,7 @@ on:
 jobs:
     sonarqube-scan:
      name: SonarQube Scan
-     runs-on: [self-hosted, onprem]
+     runs-on: ubuntu-latest
 
      steps:
      - run: echo "SonarQube scanned"
